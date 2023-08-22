@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
     public float speed;
 
     
-    
   
     void Start()
     {
