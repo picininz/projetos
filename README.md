@@ -1,2 +1,2 @@
 # codes
-Scripts de códigos que programei fazendo algumas imitações de jogos
+portifolio de scripts de alguns minijogos que programei na unity
