@@ -5,15 +5,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class TRAINER : MonoBehaviour
+public class VoltaController : MonoBehaviour
 {
-
+   
     public int score;
     public Text txtScore;
     private float timeLevel;
     public Text timeLevel_txt;
-    
-    
 
     void Start()
     {
@@ -23,19 +21,21 @@ public class TRAINER : MonoBehaviour
     void Update()
     {
         timeLevel = timeLevel + Time.deltaTime;
-        timeLevel_txt.text = timeLevel.ToString("TEMPO: 0.00");
+        timeLevel_txt.text = timeLevel.ToString("TEMPO: 0.0");
 
     }
 
-    
+    public string scene;
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             score = score + 1;
             txtScore.text = "VOLTAS: " + score;
-           
-
+            if (score > 3)
+            {
+                SceneManager.LoadScene(scene);
+            }
         }
     }
 }
