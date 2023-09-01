@@ -11,10 +11,9 @@ Demonstração de Habilidades: Cada projeto é uma oportunidade para demonstrar 
 Aprendizado Contínuo: Esses projetos refletem minha jornada de aprendizado contínuo. À medida que avanço, atualizo e aprimoro os projetos existentes e adiciono novos conforme vou explorando novas tecnologias.
 
 
-Como Entrar em Contato
+Como Entrar em Contato?
 
-Se você tiver alguma pergunta, sugestão ou apenas quiser trocar ideias, fique à vontade para entrar em contato comigo. Minhas informações de contato estão disponíveis no meu currículo.
-
+Minhas informações de contato estão disponíveis no meu currículo.
 Agradeço por visitar meu portfólio de códigos e espero que você encontre algo interessante e inspirador aqui!
 
 Felipe Picinin
