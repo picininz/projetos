@@ -1,6 +1,6 @@
 # Portfólio de Códigos
 
-Bem-vindo ao meu portfólio! Este repositório contém uma coleção diversificada de projetos e exemplos de código que demonstrem minhas habilidades e experiência como desenvolvedor. De aplicações web a scripts utilitários, aqui você encontrará uma variedade de projetos que ilustram meu conhecimento e criatividade no mundo da programação.
+Bem-vindo ao meu portfólio! Este repositório contém uma coleção diversificada de projetos e exemplos de código que demonstrem minhas habilidades e experiência como desenvolvedor. Aqui você encontrará uma variedade de projetos que ilustram meu conhecimento e criatividade no mundo da programação.
 
 O que você encontrará aqui?
 
