@@ -18,4 +18,5 @@ Agradeço por visitar meu portfólio de códigos e espero que você encontre alg
 
 Felipe Picinin
 
-[Curriculo.pdf](https://github.com/picininz/projetos/files/12543147/Curriculo.pdf)
+[Curriculo.pdf](https://github.com/picininz/projetos/files/12543155/Curriculo.pdf)
+
