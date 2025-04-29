@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quem é o Jogador?</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .genio {
+      position: relative;
+      width: 200px;
+      height: auto;
+    }
+
+    .fala {
+      position: relative;
+      background-color: white;
+      padding: 15px 20px;
+      border-radius: 20px;
+      max-width: 300px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .fala::after {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 40%;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right-color: white;
+    }
+
+    .botoes {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #resultado {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #2c3e50;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Gênio à esquerda -->
+    <img src="img/Furia_genio.png" alt="Gênio" class="genio" />
+
+    <!-- Balão com pergunta -->
+    <div>
+        <h1 style="margin-bottom: 10px;"></h1>
+        <div id="falaContainer">
+          <div id="pergunta" class="fala">Carregando...</div>
+        </div>
+        <div id="botoes" class="botoes">
+          <button onclick="responder('S')">Sim</button>
+          <button onclick="responder('N')">Não</button>
+          <button onclick="responder('NS')">Não Sei</button>
+        </div>
+        <p id="resultado"></p>
+      </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
