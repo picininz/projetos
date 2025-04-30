@@ -3,39 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quem é o Jogador?</title>
+  <meta name="description" content="Adivinhe qual jogador da FURIA CS:GO estou pensando!" />
+  <meta name="theme-color" content="#000000" />
+  <title>FURIA Kinator - Adivinhe o Jogador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #ffffff;
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes shine {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes borderGlow {
+      0% { box-shadow: 0 0 5px var(--furia-gray-light); }
+      50% { box-shadow: 0 0 20px var(--furia-gray-light); }
+      100% { box-shadow: 0 0 5px var(--furia-gray-light); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px var(--furia-gray-light); }
+      50% { text-shadow: 0 0 20px var(--furia-gray-light), 0 0 30px var(--furia-gray); }
+      100% { text-shadow: 0 0 5px var(--furia-gray-light); }
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    :root {
+      --furia-black: #111111;
+      --furia-gray-dark: #232323;
+      --furia-gray: #444444;
+      --furia-gray-light: #cccccc;
+      --furia-white: #ffffff;
+      --text-color: #ffffff;
+      --background-color: #111111;
+      --card-background: #232323;
+      --shadow-color: rgba(0, 0, 0, 0.25);
+    }
+
+    * {
       margin: 0;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 1rem;
+      background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('img/csgo-background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .container {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      max-width: 1000px;
+      width: 96%;
+      padding: 2.5rem 2rem;
+      margin: 3rem auto 3rem auto;
+      background: var(--card-background);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px 0 var(--shadow-color);
+      border: 1.5px solid var(--furia-gray-light);
+      position: relative;
+      overflow: hidden;
+      animation: borderGlow 3s infinite;
+      min-height: 0;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--furia-gray-light), var(--furia-gray));
+      animation: shine 3s infinite linear;
     }
 
     .genio {
-      position: relative;
-      width: 200px;
+      width: 250px;
       height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+      animation: float 3s ease-in-out infinite;
     }
 
     .fala {
       position: relative;
-      background-color: white;
-      padding: 15px 20px;
-      border-radius: 20px;
-      max-width: 300px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      font-size: 1.3rem;
-      color: #333;
+      background-color: var(--furia-black);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      max-width: 500px;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      font-size: 1.4rem;
+      color: var(--text-color);
+      line-height: 1.6;
+      border: 1px solid var(--furia-gray-light);
+      font-family: 'Orbitron', Arial, sans-serif;
     }
 
     .fala::after {
@@ -46,57 +148,459 @@
       width: 0;
       height: 0;
       border: 10px solid transparent;
-      border-right-color: white;
+      border-right-color: var(--furia-black);
     }
 
     .botoes {
-      margin-top: 20px;
-      text-align: center;
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    button {
-      background-color: #007bff;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      margin: 5px;
-      border-radius: 8px;
-      font-size: 1rem;
+    .botoes button, .btn-jogar, .area-inicial-direita .btn-jogar {
+      background: #18191c;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 0.7rem;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      font-size: 1.08rem;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      min-width: 120px;
+      margin: 0 0.2rem;
+      transition: all 0.2s;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 12px #0003;
+      text-shadow: none;
     }
 
-    button:hover {
-      background-color: #0056b3;
+    .botoes button:hover, .btn-jogar:hover, .area-inicial-direita .btn-jogar:hover {
+      background: #fff;
+      color: #18191c;
+      border: 2px solid #18191c;
+      box-shadow: 0 4px 18px #0003;
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    button:active {
+      transform: translateY(0);
     }
 
     #resultado {
-      margin-top: 30px;
-      font-size: 1.2rem;
-      color: #2c3e50;
+      margin-top: 2.5rem;
+      font-size: 1.5rem;
+      color: var(--furia-gray-light);
       text-align: center;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeIn 0.5s ease-out, glow 2s infinite;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 0.5rem;
+      border: 1px solid var(--furia-gray-light);
+    }
+
+    #resultado:empty {
+      display: none;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .logo {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 80px;
+      height: auto;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+      animation: pulse 2s infinite;
+    }
+
+    .stats {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 0.9rem;
+      color: var(--furia-gray-light);
+      text-align: right;
+    }
+
+    .typing {
+      overflow: hidden;
+      border-right: 2px solid var(--furia-gray-light);
+      white-space: nowrap;
+      animation: 
+        typing 3.5s steps(40, end),
+        blink .75s step-end infinite;
+    }
+
+    .tela-inicial {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 60vh;
+      text-align: center;
+      padding: 2rem 1rem;
+      gap: 2rem;
+    }
+
+    .tela-inicial h2 {
+      font-size: 2.5rem;
+      color: var(--furia-gray-light);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .tela-inicial p {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tela-inicial .genio {
+      margin-bottom: 1.5rem;
+      width: 180px;
+      height: auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .btn-jogar {
+      background: var(--furia-black);
+      color: var(--furia-white);
+      border: 2px solid var(--furia-white);
+      border-radius: 0.8rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      min-width: 200px;
+    }
+
+    .btn-jogar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-jogar:hover::before {
+      left: 100%;
+    }
+
+    .btn-jogar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-jogar:active {
+      transform: translateY(0);
+    }
+
+    .jogo-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 60vh;
+      gap: 2rem;
+    }
+
+    .jogo-container.ativo {
+      display: flex;
+    }
+
+    .tela-inicial.ativo {
+      display: flex;
+    }
+
+    .tela-inicial.inativo {
+      display: none;
+    }
+
+    .jogo-container.inativo {
+      display: none;
+    }
+
+    .main-jogo-layout {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 3rem;
+      min-height: 60vh;
+    }
+
+    .genio-grande {
+      width: 340px;
+      min-width: 220px;
+      max-width: 400px;
+      height: auto;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+      display: block;
+    }
+
+    .area-perguntas #falaContainer {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .area-perguntas .fala {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: #18191c;
+      border: 2px solid #fff;
+      color: #fff;
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 0 24px 0 #0008, 0 2px 12px 0 #0008;
+      margin-bottom: 0;
+      text-align: left;
+      text-shadow: none;
+      letter-spacing: 1px;
+      transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+      font-family: 'Orbitron', Arial, sans-serif;
+    }
+
+    .area-perguntas .fala::after {
+      border-right-color: #18191c;
+    }
+
+    .area-perguntas .botoes {
+      width: 100%;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .area-perguntas #resultado {
+      font-size: 2rem;
+      color: #fff;
+      font-weight: 900;
+      background: #18191c;
+      border-radius: 0.7rem;
+      border: 2px solid #fff;
+      padding: 1.2rem 1.5rem;
+      margin-top: 2.2rem;
+      margin-bottom: 1.2rem;
+      min-height: 2.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 0 24px #0008, 0 0 8px #fff1;
+      text-shadow: none;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .area-perguntas #jogar-novamente {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .main-jogo-layout {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .genio-grande {
+        width: 200px;
+        max-width: 220px;
+      }
+      .area-perguntas {
+        padding: 1.5rem 1rem;
+        min-width: 0;
+        max-width: 100vw;
+      }
+    }
+
+    .main-inicial-layout {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 2.5rem;
+      min-height: 60vh;
+    }
+    .genio-inicial {
+      width: 340px;
+      min-width: 200px;
+      max-width: 400px;
+      height: auto;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.6));
+      display: block;
+      margin-bottom: 0;
+    }
+    .area-inicial-direita {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(40, 40, 40, 0.97);
+      border-radius: 1.3rem;
+      box-shadow: 0 0 32px 0 #fff3, 0 2px 24px 0 #0008;
+      border: 2.5px solid #fff;
+      padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+      min-width: 0;
+      max-width: 370px;
+      margin-left: 0;
+      transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+    }
+    .area-inicial-direita:hover {
+      box-shadow: 0 0 48px 0 #fff6, 0 4px 32px 0 #000a;
+      border: 2.5px solid #fff;
+      background: rgba(60, 60, 60, 0.99);
+    }
+    .area-inicial-direita h2 {
+      font-size: 2.1rem;
+      color: #fff;
+      margin-bottom: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 18px #fff, 0 0 8px #fff1, 0 0 2px #fff1;
+      font-weight: 900;
+      filter: brightness(1.2);
+    }
+    .area-inicial-direita p {
+      font-size: 1.08rem;
+      color: var(--furia-gray-light);
+      margin-bottom: 1.3rem;
+      line-height: 1.5;
+      max-width: 90%;
+      text-align: center;
+    }
+    .area-inicial-direita .btn-jogar {
+      background: #18191c;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 0.7rem;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      font-size: 1.08rem;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      min-width: 120px;
+      margin: 0 0.2rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #0003;
+      text-shadow: none;
+    }
+    .area-inicial-direita .btn-jogar:hover {
+      background: #fff;
+      color: #18191c;
+      border: 2px solid #18191c;
+      box-shadow: 0 4px 18px #0003;
+      transform: translateY(-2px) scale(1.05);
+    }
+    @media (max-width: 900px) {
+      .main-inicial-layout {
+        flex-direction: column;
+        gap: 1.2rem;
+        min-height: 60vh;
+      }
+      .genio-inicial {
+        width: 180px;
+        max-width: 200px;
+      }
+      .area-inicial-direita {
+        padding: 1.2rem 1rem 1.5rem 1rem;
+        min-width: 0;
+        max-width: 100vw;
+        align-items: center;
+        text-align: center;
+      }
+      .area-inicial-direita h2 {
+        font-size: 1.05rem;
+      }
+      .area-inicial-direita .btn-jogar {
+        font-size: 0.98rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 0.6rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Gênio à esquerda -->
-    <img src="img/Furia_genio.png" alt="Gênio" class="genio" />
-
-    <!-- Balão com pergunta -->
-    <div>
-        <h1 style="margin-bottom: 10px;"></h1>
-        <div id="falaContainer">
-          <div id="pergunta" class="fala">Carregando...</div>
+  <main class="container" role="main">
+    <img src="img/furia_logo.png" alt="Logo FURIA" class="logo" width="80" height="80" />
+    <div class="tela-inicial ativo">
+      <div class="main-inicial-layout">
+        <img src="img/Furia_genio.png" alt="Gênio da FURIA" class="genio-inicial" />
+        <div class="area-inicial-direita">
+          <h2>FURIAKINATOR</h2>
+          <p>Pense em um jogador da FURIA CS e eu tentarei adivinhar quem é!</p>
+          <button class="btn-jogar" onclick="iniciarJogo()">Jogar</button>
         </div>
-        <div id="botoes" class="botoes">
-          <button onclick="responder('S')">Sim</button>
-          <button onclick="responder('N')">Não</button>
-          <button onclick="responder('NS')">Não Sei</button>
-        </div>
-        <p id="resultado"></p>
       </div>
-
-  <script src="script.js"></script>
+    </div>
+    <div class="jogo-container inativo">
+      <div class="main-jogo-layout">
+        <img src="img/Furia_genio.png" alt="Gênio da FURIA" class="genio-grande" />
+        <div class="area-perguntas">
+          <section aria-labelledby="pergunta-titulo">
+            <h1 id="pergunta-titulo" class="sr-only">FURIA Kinator - Adivinhe o Jogador</h1>
+            <div id="falaContainer">
+              <div id="pergunta" class="fala" role="status" aria-live="polite">Carregando...</div>
+            </div>
+            <div id="botoes" class="botoes" role="group" aria-label="Opções de resposta">
+              <button onclick="responder('S')" aria-label="Sim">Sim</button>
+              <button onclick="responder('NS')" aria-label="Não Sei">Não Sei</button>
+              <button onclick="responder('N')" aria-label="Não">Não</button>
+              
+            </div>
+            <p id="resultado" role="status" aria-live="polite"></p>
+            <div id="jogar-novamente" class="botoes" style="display: none;">
+              <button class="btn-jogar" onclick="iniciarJogo()">Jogar Novamente</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="script.js" defer></script>
 </body>
 </html>

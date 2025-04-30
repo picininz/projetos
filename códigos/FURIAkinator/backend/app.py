@@ -46,5 +46,12 @@ def receber_resposta():
 
     return jsonify({"ok": True})
 
+@app.route("/reset", methods=["POST"])
+def resetar_jogo():
+    global dados, jogador
+    dados = dados_iniciais.copy()
+    jogador = None
+    return jsonify({"ok": True})
+
 if __name__ == "__main__":
     app.run(debug=True)
